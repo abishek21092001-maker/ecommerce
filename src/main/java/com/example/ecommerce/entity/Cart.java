@@ -1,7 +1,5 @@
 package com.example.ecommerce.entity;
 
-import java.time.LocalDateTime;
-
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -10,26 +8,35 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
 @Entity
-public class Role {
+public class Cart {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name ="role_id")
-	private Long roleid;
+	private Long cartid;
 	
-	@Column(name ="role_name")
-	private String name;
+	@OneToOne
+	@JoinColumn(name = "user_id")
+	private User user;
 	
-	private String description;
 	@CreatedDate
-	@Column(name ="created_at")
-	private LocalDateTime createdat;
+	@Column(name = "created_at")
+	private String createdat;
 	
 	@LastModifiedDate
-	@Column(name ="updated_at")
-	private LocalDateTime updatedat;
+	@Column(name = "updated_at")
+	private String updatedat;
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

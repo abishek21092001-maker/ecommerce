@@ -11,25 +11,27 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-
 @Entity
-public class Role {
+public class Category {
+	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name ="role_id")
-	private Long roleid;
+	@Column(name = "category_id")
+	private Long categoryid ;
 	
-	@Column(name ="role_name")
+	
 	private String name;
 	
 	private String description;
-	@CreatedDate
-	@Column(name ="created_at")
-	private LocalDateTime createdat;
 	
+	@CreatedDate
+	@Column(name = "created_at", updatable = false,nullable = false)
+	private LocalDateTime createdat;
 	@LastModifiedDate
-	@Column(name ="updated_at")
+	@Column(name = "updated_at",nullable = false)
 	private LocalDateTime updatedat;
+	
+	
 
 }
