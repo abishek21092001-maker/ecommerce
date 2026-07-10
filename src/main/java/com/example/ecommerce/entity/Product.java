@@ -17,7 +17,7 @@ import jakarta.persistence.ManyToOne;
 public class Product {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long productid;
 	
 	@ManyToOne

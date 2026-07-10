@@ -15,7 +15,7 @@ import jakarta.persistence.OneToOne;
 public class Cart {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long cartid;
 	
 	@OneToOne
