@@ -14,6 +14,50 @@ import jakarta.persistence.OneToOne;
 @Entity
 public class Cart {
 	
+	public Cart() {
+		super();
+	}
+
+	public Cart(Long cartid, User user, String createdat, String updatedat) {
+		super();
+		this.cartid = cartid;
+		this.user = user;
+		this.createdat = createdat;
+		this.updatedat = updatedat;
+	}
+
+	public Long getCartid() {
+		return cartid;
+	}
+
+	public void setCartid(Long cartid) {
+		this.cartid = cartid;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public String getCreatedat() {
+		return createdat;
+	}
+
+	public void setCreatedat(String createdat) {
+		this.createdat = createdat;
+	}
+
+	public String getUpdatedat() {
+		return updatedat;
+	}
+
+	public void setUpdatedat(String updatedat) {
+		this.updatedat = updatedat;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long cartid;

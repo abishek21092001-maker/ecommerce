@@ -21,6 +21,48 @@ public class Category {
 	private Long categoryid ;
 	
 	
+	public Category() {
+		super();
+	}
+	public Category(Long categoryid, String name, String description, LocalDateTime createdat,
+			LocalDateTime updatedat) {
+		super();
+		this.categoryid = categoryid;
+		this.name = name;
+		this.description = description;
+		this.createdat = createdat;
+		this.updatedat = updatedat;
+	}
+	public Long getCategoryid() {
+		return categoryid;
+	}
+	public void setCategoryid(Long categoryid) {
+		this.categoryid = categoryid;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public LocalDateTime getCreatedat() {
+		return createdat;
+	}
+	public void setCreatedat(LocalDateTime createdat) {
+		this.createdat = createdat;
+	}
+	public LocalDateTime getUpdatedat() {
+		return updatedat;
+	}
+	public void setUpdatedat(LocalDateTime updatedat) {
+		this.updatedat = updatedat;
+	}
 	private String name;
 	
 	private String description;
