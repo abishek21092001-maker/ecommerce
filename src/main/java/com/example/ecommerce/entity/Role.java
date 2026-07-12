@@ -14,14 +14,16 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Role {
-	
+
 	public Role() {
 		super();
 	}
 
-	public Role(Long roleid, String name, String description, LocalDateTime createdat, LocalDateTime updatedat) {
+	public Role(Long roleid, String rolecode, String name, String description, LocalDateTime createdat,
+			LocalDateTime updatedat) {
 		super();
 		this.roleid = roleid;
+		this.rolecode = rolecode;
 		this.name = name;
 		this.description = description;
 		this.createdat = createdat;
@@ -34,6 +36,14 @@ public class Role {
 
 	public void setRoleid(Long roleid) {
 		this.roleid = roleid;
+	}
+
+	public String getRolecode() {
+		return rolecode;
+	}
+
+	public void setRolecode(String rolecode) {
+		this.rolecode = rolecode;
 	}
 
 	public String getName() {
@@ -72,6 +82,9 @@ public class Role {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name ="role_id")
 	private Long roleid;
+	
+	@Column(name = "role_code")
+	private String rolecode;
 	
 	@Column(name ="role_name")
 	private String name;

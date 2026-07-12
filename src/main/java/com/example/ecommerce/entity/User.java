@@ -131,7 +131,7 @@ public class User {
 	private String address;
 	
 	@CreatedDate
-	@Column(name = "created_at",nullable = false)
+	@Column(name = "created_at",nullable = false,updatable = false)
 	private LocalDateTime createdat;
 	
 	@LastModifiedDate
