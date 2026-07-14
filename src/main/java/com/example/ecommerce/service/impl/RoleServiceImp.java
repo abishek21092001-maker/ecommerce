@@ -13,4 +13,17 @@ public interface RoleServiceImp {
 
 	Page<RoleResponseDto> getrole(int page, int size);
 
+	RoleResponseDto getrolebyid(Long id);
+
+
+	RoleResponseDto putrolebyid(Long id, RoleRequestDto rolerequestdto);
+
+	String deletebyid(Long id);
+
+
+
+
+
+
+
 }

@@ -7,17 +7,18 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class RoleResponseDto {
 	
 
-	private Long roleid;
 	public RoleResponseDto() {
 		super();
 	}
-	public RoleResponseDto(Long roleid, String name, String description, String rolecode, LocalDateTime createdat) {
+	public RoleResponseDto(Long roleid, String name, String description, String rolecode, LocalDateTime createdat,
+			LocalDateTime updatedat) {
 		super();
 		this.roleid = roleid;
 		this.name = name;
 		this.description = description;
 		this.rolecode = rolecode;
 		this.createdat = createdat;
+		this.updatedat = updatedat;
 	}
 	public Long getRoleid() {
 		return roleid;
@@ -49,10 +50,20 @@ public class RoleResponseDto {
 	public void setCreatedat(LocalDateTime createdat) {
 		this.createdat = createdat;
 	}
+	public LocalDateTime getUpdatedat() {
+		return updatedat;
+	}
+	public void setUpdatedat(LocalDateTime updatedat) {
+		this.updatedat = updatedat;
+	}
+	private Long roleid;
+	
 	private String name;
 	private String description;
 	private String rolecode;
 	@JsonFormat(pattern= "dd/mm/yyyy hh:mm a")
 	private LocalDateTime createdat;
+	@JsonFormat(pattern = "dd/mm/yyyy hh:mm a" )
+	private LocalDateTime updatedat;
 
 }
