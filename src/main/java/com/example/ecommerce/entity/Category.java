@@ -15,19 +15,14 @@ import jakarta.persistence.Id;
 public class Category {
 	
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "category_id")
-	private Long categoryid ;
-	
-	
 	public Category() {
 		super();
 	}
-	public Category(Long categoryid, String name, String description, LocalDateTime createdat,
+	public Category(Long categoryid, String categorycode, String name, String description, LocalDateTime createdat,
 			LocalDateTime updatedat) {
 		super();
 		this.categoryid = categoryid;
+		this.categorycode = categorycode;
 		this.name = name;
 		this.description = description;
 		this.createdat = createdat;
@@ -38,6 +33,12 @@ public class Category {
 	}
 	public void setCategoryid(Long categoryid) {
 		this.categoryid = categoryid;
+	}
+	public String getCategorycode() {
+		return categorycode;
+	}
+	public void setCategorycode(String categorycode) {
+		this.categorycode = categorycode;
 	}
 	public String getName() {
 		return name;
@@ -63,6 +64,13 @@ public class Category {
 	public void setUpdatedat(LocalDateTime updatedat) {
 		this.updatedat = updatedat;
 	}
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "category_id")
+	private Long categoryid ;
+	
+	private String categorycode;
+	
 	private String name;
 	
 	private String description;
