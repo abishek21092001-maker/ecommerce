@@ -15,16 +15,21 @@ import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Product {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long productid;
 	
 	public Product() {
 		super();
 	}
 
-	public Product(Long productid, Category categoryid, String name, String description, double price, int stock,
-			String imageurl, LocalDateTime createdat, LocalDateTime updatedat) {
+	public Product(Long productid, Category categoryid, String categorycode, String name, String description,
+			double price, int stock, String imageurl, LocalDateTime createdat, LocalDateTime updatedat) {
 		super();
 		this.productid = productid;
 		this.categoryid = categoryid;
+		this.categorycode = categorycode;
 		this.name = name;
 		this.description = description;
 		this.price = price;
@@ -48,6 +53,14 @@ public class Product {
 
 	public void setCategoryid(Category categoryid) {
 		this.categoryid = categoryid;
+	}
+
+	public String getCategorycode() {
+		return categorycode;
+	}
+
+	public void setCategorycode(String categorycode) {
+		this.categorycode = categorycode;
 	}
 
 	public String getName() {
@@ -106,14 +119,11 @@ public class Product {
 		this.updatedat = updatedat;
 	}
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long productid;
-	
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category categoryid;
-	
+	@Column(name = "category_code")
+	private String categorycode;
 	private String name;
 	
 	private String description;
