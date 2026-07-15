@@ -11,6 +11,22 @@ public interface CategoryServiceImp {
 	CategoryResponseDto addcategory(CategoryRequestDto categoryrequestdto);
 
 
+	Page<CategoryResponseDto> getcategory(int page, int size);
+
+
+
+
+	CategoryResponseDto getcategorybyid(Long id);
+
+
+	CategoryResponseDto putcategorybyid(Long id, CategoryRequestDto categoryrequestdto);
+
+
+	String deletecategorybyid(Long id);
+
+
+
+
 
 
 
