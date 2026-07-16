@@ -24,12 +24,12 @@ public class Product {
 		super();
 	}
 
-	public Product(Long productid, Category categoryid, String categorycode, String name, String description,
+	public Product(Long productid, Category categoryid, String productcode, String name, String description,
 			double price, int stock, String imageurl, LocalDateTime createdat, LocalDateTime updatedat) {
 		super();
 		this.productid = productid;
 		this.categoryid = categoryid;
-		this.categorycode = categorycode;
+		this.productcode = productcode;
 		this.name = name;
 		this.description = description;
 		this.price = price;
@@ -55,12 +55,12 @@ public class Product {
 		this.categoryid = categoryid;
 	}
 
-	public String getCategorycode() {
-		return categorycode;
+	public String getProductcode() {
+		return productcode;
 	}
 
-	public void setCategorycode(String categorycode) {
-		this.categorycode = categorycode;
+	public void setProductcode(String productcode) {
+		this.productcode = productcode;
 	}
 
 	public String getName() {
@@ -123,7 +123,7 @@ public class Product {
 	@JoinColumn(name = "category_id")
 	private Category categoryid;
 	@Column(name = "category_code")
-	private String categorycode;
+	private String productcode;
 	private String name;
 	
 	private String description;
@@ -136,7 +136,7 @@ public class Product {
 	private String imageurl;
 	
 	@CreatedDate
-	@Column(name = "created_at")
+	@Column(name = "created_at",updatable = false )
 	private LocalDateTime createdat;
 	
 	@LastModifiedDate
