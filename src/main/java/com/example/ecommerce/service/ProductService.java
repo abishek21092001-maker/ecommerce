@@ -8,10 +8,14 @@ import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.ecommerce.dto.ProductRequestDto;
+import com.example.ecommerce.dto.ProductResponseDto;
 import com.example.ecommerce.entity.Category;
 import com.example.ecommerce.entity.Product;
 import com.example.ecommerce.repository.CategoryRepository;
@@ -81,6 +85,28 @@ public class ProductService implements ProductServiceImp {
 	    productrepository.save(saved);
 
 	    return "Product Saved Successfully";
+	}
+
+	@Override
+	public Page<ProductResponseDto> getproduct(int page, int size) {
+		
+		Pageable pageable = PageRequest.of(page, size);
+		
+		Page<Product> products = productrepository.findAll(pageable);
+		return products.map(product ->{
+			ProductResponseDto productresponsedto = new ProductResponseDto();
+			productresponsedto.setName(product.getName());
+			productresponsedto.setDescription(product.getDescription());
+			productresponsedto.setPrice(product.getPrice());
+			productresponsedto.setStock(product.getStock());
+			productresponsedto.setImageurl(product.getImageurl());
+			
+			return productresponsedto;	
+		});
+		
+	
+		
+		
 	}
 
 	
