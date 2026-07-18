@@ -6,6 +6,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -109,10 +111,90 @@ public class ProductService implements ProductServiceImp {
 		
 	}
 
+	@Override
+	public List<ProductResponseDto> searchproduct(String name) {
+		List<Product> products=  productrepository.findByNameContainingIgnoreCase(name);
+		
+		List<ProductResponseDto> produc = new ArrayList<>();
+		
+		for(Product product :products ) {
+			
+			ProductResponseDto dto = new ProductResponseDto();
+			
+		    
+	        dto.setName(product.getName());
+	        dto.setDescription(product.getDescription());
+	        dto.setPrice(product.getPrice());
+	        dto.setStock(product.getStock());
+	        dto.setImageurl(product.getImageurl());
+			
+	        produc.add(dto);
+		}
+		
+		
+		return produc;
+	}
+
+	@Override
+	public List<ProductResponseDto> filterbyrange(Double min, Double max) {
+		List<Product> products = productrepository.findByPriceBetween(min, max);
+		
+		List<ProductResponseDto> dto = new ArrayList<>();
+		
+		for(Product product : products) {
+			
+			ProductResponseDto prdto = new ProductResponseDto();
+			
+			
+			    prdto.setName(product.getName());
+			    prdto.setDescription(product.getDescription());
+			    prdto.setPrice(product.getPrice());
+			    prdto.setStock(product.getStock());
+			    prdto.setImageurl(product.getImageurl());
+			    
+			    dto.add(prdto);
+			    
+			
+			
+		}
+		
+		return dto;
+	}
+
+	@Override
+	public ProductResponseDto getproductbyid(Long id) {
+		
+		Product product = productrepository.findById(id).orElseThrow(() -> new RuntimeException("Product Not Found"));
+		ProductResponseDto productresponcedto = new ProductResponseDto();
+		
+		productresponcedto.setName(product.getName());
+		productresponcedto.setDescription(product.getDescription());
+		productresponcedto.setPrice(product.getPrice());
+		productresponcedto.setStock(product.getStock());
+		productresponcedto.setImageurl(product.getImageurl());
+		
+		
+		return productresponcedto;
+	}
+
+	@Override
+	public String updateproductbyid(Long id, ProductRequestDto productrequestdto) {
+		Product product = productrepository.findById(id).orElseThrow(() -> new RuntimeException("Product Not Found"));
+		
+	    product.setName(productrequestdto.getName());
+	    product.setDescription(productrequestdto.getDescription());
+	    product.setPrice(productrequestdto.getPrice());
+	    product.setStock(productrequestdto.getStock());
+	    product.setUpdatedat(LocalDateTime.now());
+	    
+	   Product products = productrepository.save(product);
+		
+		return "saved sucessfully";
+	}
+	
 	
 
 	
-
 	
 
 }
