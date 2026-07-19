@@ -21,7 +21,13 @@ public interface ProductServiceImp {
 
 	ProductResponseDto getproductbyid(Long id);
 
-	String updateproductbyid(Long id, ProductRequestDto productrequestdto);
+	String updateproductbyid(Long id, ProductRequestDto productrequestdto, MultipartFile image) throws IOException;
+
+	String deleteproductbyid(Long id);
+
+
+
+	
 
 	
 

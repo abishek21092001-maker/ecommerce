@@ -62,6 +62,7 @@ public class ProductService implements ProductServiceImp {
 	    Path uploadPath = Paths.get("uploads");
 
 	    if (!Files.exists(uploadPath)) {
+	    	
 	        Files.createDirectories(uploadPath);
 	    }
 
@@ -178,8 +179,10 @@ public class ProductService implements ProductServiceImp {
 	}
 
 	@Override
-	public String updateproductbyid(Long id, ProductRequestDto productrequestdto) {
-		Product product = productrepository.findById(id).orElseThrow(() -> new RuntimeException("Product Not Found"));
+	public String updateproductbyid(Long id, ProductRequestDto productrequestdto, MultipartFile image) throws IOException {
+		
+		Product product = productrepository.findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
+		
 		
 	    product.setName(productrequestdto.getName());
 	    product.setDescription(productrequestdto.getDescription());
@@ -187,10 +190,47 @@ public class ProductService implements ProductServiceImp {
 	    product.setStock(productrequestdto.getStock());
 	    product.setUpdatedat(LocalDateTime.now());
 	    
-	   Product products = productrepository.save(product);
-		
-		return "saved sucessfully";
+	    if(image != null && !image.isEmpty()) {	
+	    	String filename = image.getOriginalFilename();
+
+		    // Create uploads folder if it does not exist
+		    Path uploadPath = Paths.get("uploads");
+
+		    if (!Files.exists(uploadPath)) {
+		    	
+		        Files.createDirectories(uploadPath);
+		    }
+
+		    // Save image into uploads folder
+		    Files.copy(
+		            image.getInputStream(),
+		            uploadPath.resolve(filename),	
+		            StandardCopyOption.REPLACE_EXISTING);
+
+		    // Save image path in database
+		    product.setImageurl("uploads/" + filename);
+
+		    // Save product first to generate Product ID
+		    
+	    	
+	    	
+	    	
+	    }
+	    productrepository.save(product);
+	    
+		return "updated sucessfully";
 	}
+
+	@Override
+	public String deleteproductbyid(Long id) {
+		productrepository.deleteById(id);
+		return "deleted by sucessfully";
+	}
+	
+	
+	
+
+
 	
 	
 
