@@ -226,6 +226,29 @@ public class ProductService implements ProductServiceImp {
 		productrepository.deleteById(id);
 		return "deleted by sucessfully";
 	}
+
+	@Override
+	public Page<ProductResponseDto> filterdata(String name, int price, Long categoryid, int page, int size) {
+		
+		Pageable pageable = PageRequest.of(page, size);
+		
+		Page<Product> role = productrepository.filterproducts(name, price, categoryid, pageable);
+		return role.map(product -> {
+			
+			ProductResponseDto productresponsedto = new ProductResponseDto();
+			productresponsedto.setName(product.getName());
+			productresponsedto.setDescription(product.getDescription());
+			productresponsedto.setPrice(product.getPrice());
+			productresponsedto.setStock(product.getStock());
+			productresponsedto.setImageurl(product.getImageurl());
+			
+			return productresponsedto;
+			
+		});
+				
+				
+		
+	}
 	
 	
 	

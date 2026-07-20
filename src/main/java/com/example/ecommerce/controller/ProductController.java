@@ -69,6 +69,12 @@ public class ProductController {
 	}
 	
 	
+	Page<ProductResponseDto> filterdata(@RequestParam String name,@RequestParam int price, @RequestParam Long categoryid, @RequestParam(defaultValue = "0")int page, @RequestParam(defaultValue = "0")int size ){
+	
+		return productserviceimp.filterdata(name,price,categoryid,page,size);
+	}
+	
+	
 	
 	
 	

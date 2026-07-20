@@ -25,6 +25,8 @@ public interface ProductServiceImp {
 
 	String deleteproductbyid(Long id);
 
+	Page<ProductResponseDto> filterdata(String name, int price, Long categoryid, int page, int size);
+
 
 
 	

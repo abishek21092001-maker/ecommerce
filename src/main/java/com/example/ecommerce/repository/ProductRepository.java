@@ -15,28 +15,18 @@ public interface ProductRepository extends JpaRepository<Product,Long>{
 	
 	List<Product> findByPriceBetween(Double min, Double max);
 	
-//	   @Query("""
-//	            SELECT p
-//	            FROM Product p
-//	            WHERE
-//	            (:name IS NULL OR LOWER(p.name) LIKE LOWER(CONCAT('%', :name, '%')))
-//	            AND
-//	            (:categoryId IS NULL OR p.categoryid.categoryid = :categoryId)
-//	            AND
-//	            (:price IS NULL OR p.price <= :price)
-//	            """)
-//	    Page<Product> filterProducts(
-//
-//	            @Param("name") String name,
-//
-//	            @Param("categoryId") Long categoryId,
-//
-//	            @Param("price") Double price,
-//
-//	            Pageable pageable);
-//
-//	}
-//	
+	
+	@Query("""
+            SELECT p
+            FROM Product p
+            WHERE
+            (:name IS NULL OR LOWER(p.name) LIKE LOWER(CONCAT('%', :name, '%')))
+            AND
+            (:categoryId IS NULL OR p.categoryid.categoryid = :categoryId)
+            AND
+            (:price IS NULL OR p.price <= :price)
+            """)
+	Page<Product> filterproducts(@Param("name") String name,@Param("price") double price, @Param("categoryid") Long categoryid ,Pageable pageable);
 
 
 }
