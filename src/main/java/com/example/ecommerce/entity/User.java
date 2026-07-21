@@ -22,13 +22,14 @@ public class User {
 		super();
 	}
 
-	public User(Long userid, Role role, String name, @NotBlank String email, String password, String phone,
-			String address, LocalDateTime createdat, LocalDateTime updateddat) {
+	public User(Long userid, Role role, String name, @NotBlank String email, String rolecode, String password,
+			String phone, String address, LocalDateTime createdat, LocalDateTime updateddat) {
 		super();
 		this.userid = userid;
 		this.role = role;
 		this.name = name;
 		this.email = email;
+		this.rolecode = rolecode;
 		this.password = password;
 		this.phone = phone;
 		this.address = address;
@@ -66,6 +67,14 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getRolecode() {
+		return rolecode;
+	}
+
+	public void setRolecode(String rolecode) {
+		this.rolecode = rolecode;
 	}
 
 	public String getPassword() {
@@ -109,7 +118,7 @@ public class User {
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name= "user_id")
 	private Long userid;
 	
@@ -122,6 +131,9 @@ public class User {
 	@NotBlank
 	@Column(unique = true)
 	private String email;
+	
+	@Column(name = "role_code")
+	private String rolecode;
 	
 	private String password;
 	
