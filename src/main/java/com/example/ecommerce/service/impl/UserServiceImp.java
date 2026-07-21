@@ -13,6 +13,10 @@ public interface UserServiceImp {
 
 	UserResponseDTO getuserbyid(Long id);
 
+	String updateuserbyid(Long id, UserRegisterRequestDTO userregisterrequestDTO);
+
+	String deleteuserbyid(Long id);
+
 
 
 }

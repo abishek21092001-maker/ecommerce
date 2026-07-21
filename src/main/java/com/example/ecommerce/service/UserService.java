@@ -83,7 +83,6 @@ public class UserService implements UserServiceImp {
 		
 		UserResponseDTO userresponsedto = new UserResponseDTO();
 		
-
 		userresponsedto.setUser_id(user.getUserid());
 		userresponsedto.setName(user.getName());
 		userresponsedto.setEmail(user.getEmail());
@@ -91,10 +90,41 @@ public class UserService implements UserServiceImp {
 		userresponsedto.setPassword(user.getPassword());
 		userresponsedto.setPhone(user.getPhone());
 		
-		
-		
-		
 		return userresponsedto;
+	}
+
+	@Override
+	public String updateuserbyid(Long id, UserRegisterRequestDTO userregisterrequestDTO) {
+		
+		User user = userrepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("user id not found"));
+		
+		user.setName(userregisterrequestDTO.getName());
+		user.setEmail(userregisterrequestDTO.getEmail());
+		user.setAddress(userregisterrequestDTO.getAddress());
+		user.setPhone(userregisterrequestDTO.getPhone());
+		user.setPassword(userregisterrequestDTO.getPassword());
+		
+			
+		user.setUpdateddat(LocalDateTime.now());
+		
+		
+		
+		userrepository.save(user);
+		
+		
+		
+		
+		
+		return "Sucessfully Updated";
+	}
+
+	@Override
+	public String deleteuserbyid(Long id) {
+		User user = userrepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("user not found"));
+		
+		userrepository.delete(user);
+		
+		return "deleted sucessfully";
 	}
 	
 	
