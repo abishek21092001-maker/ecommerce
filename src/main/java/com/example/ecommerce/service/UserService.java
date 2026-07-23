@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.ecommerce.dto.UserRegisterRequestDTO;
@@ -25,6 +26,9 @@ public class UserService implements UserServiceImp {
 	
 	@Autowired
 	private RoleRepository rolerepository ;
+	
+	@Autowired
+	private PasswordEncoder passwordencoder;
 
 	@Override
 	public String registeruser(UserRegisterRequestDTO userregisterrequestDTO) {
@@ -36,7 +40,7 @@ public class UserService implements UserServiceImp {
 		user.setEmail(userregisterrequestDTO.getEmail());
 		user.setAddress(userregisterrequestDTO.getAddress());
 		user.setPhone(userregisterrequestDTO.getPhone());
-		user.setPassword(userregisterrequestDTO.getPassword());
+		user.setPassword(passwordencoder.encode(userregisterrequestDTO.getPassword()));
 		user.setCreatedat(LocalDateTime.now());
 		user.setUpdateddat(LocalDateTime.now());
 		
