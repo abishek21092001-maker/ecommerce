@@ -9,6 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.ecommerce.dto.UserLoginRequestDTO;
+import com.example.ecommerce.dto.UserLoginResponseDTO;
 import com.example.ecommerce.dto.UserRegisterRequestDTO;
 import com.example.ecommerce.dto.UserResponseDTO;
 import com.example.ecommerce.entity.Role;
@@ -29,6 +31,9 @@ public class UserService implements UserServiceImp {
 	
 	@Autowired
 	private PasswordEncoder passwordencoder;
+	
+	@Autowired
+	private Jwtservice jwtservice;
 
 	@Override
 	public String registeruser(UserRegisterRequestDTO userregisterrequestDTO) {
@@ -129,6 +134,25 @@ public class UserService implements UserServiceImp {
 		userrepository.delete(user);
 		
 		return "deleted sucessfully";
+	}
+
+	@Override
+	public UserLoginResponseDTO loginuser(UserLoginRequestDTO userloginrequestdto) {
+		
+		User user = userrepository.findByEmail(userloginrequestdto.getEmail()).orElseThrow(()-> new ResourceNotFoundException("Email id is not found"));
+		
+		if(!passwordencoder.matches(userloginrequestdto.getPassword(), user.getPassword()))
+		{
+			throw new RuntimeException("Password is not valid");
+		}
+		
+		String token = jwtservice.generatetoken(user.getEmail());
+		UserLoginResponseDTO response = new UserLoginResponseDTO();
+		
+		response.setAccessToken(token);
+		
+		
+		return response;
 	}
 	
 	

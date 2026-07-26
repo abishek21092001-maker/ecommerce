@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.ecommerce.dto.UserLoginRequestDTO;
+import com.example.ecommerce.dto.UserLoginResponseDTO;
 import com.example.ecommerce.dto.UserRegisterRequestDTO;
 import com.example.ecommerce.dto.UserResponseDTO;
 import com.example.ecommerce.service.impl.UserServiceImp;
@@ -50,6 +52,11 @@ public class UserController {
 	@DeleteMapping("/{id}")
 	public String deleteuserbyid(@PathVariable Long id) {
 		return uerserviceimp.deleteuserbyid(id);
+	}
+	
+	@PostMapping("/login")
+	public UserLoginResponseDTO loginuser(@RequestBody UserLoginRequestDTO userloginrequestdto) {
+		return uerserviceimp.loginuser(userloginrequestdto);
 	}
 	
 	
