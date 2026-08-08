@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.ecommerce.entity.User;
 
+
 public interface UserReository extends JpaRepository<User,Long>{
 	
 	Optional<User> findByEmail(String email);
