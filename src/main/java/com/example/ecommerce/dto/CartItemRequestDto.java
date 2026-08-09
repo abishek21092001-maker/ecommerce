@@ -7,15 +7,17 @@ import com.example.ecommerce.entity.Product;
 
 public class CartItemRequestDto {
 	
+
 	 public CartItemRequestDto() {
 		super();
 	}
-	 public CartItemRequestDto(Cart cart, Product product, Integer quantity, BigDecimal price) {
+	 public CartItemRequestDto(Cart cart, Product product, Long quantity, BigDecimal price, Long subtotal) {
 		super();
 		this.cart = cart;
 		this.product = product;
 		this.quantity = quantity;
 		this.price = price;
+		this.subtotal = subtotal;
 	}
 	 public Cart getCart() {
 		return cart;
@@ -29,10 +31,10 @@ public class CartItemRequestDto {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-	public Integer getQuantity() {
+	public Long getQuantity() {
 		return quantity;
 	}
-	public void setQuantity(Integer quantity) {
+	public void setQuantity(Long quantity) {
 		this.quantity = quantity;
 	}
 	public BigDecimal getPrice() {
@@ -41,9 +43,17 @@ public class CartItemRequestDto {
 	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
+	public Long getSubtotal() {
+		return subtotal;
+	}
+	public void setSubtotal(Long subtotal) {
+		this.subtotal = subtotal;
+	}
 	 private Cart cart;
 	 private Product product;
-	 private Integer quantity;
+	 private Long quantity;
 	 private BigDecimal price;
+	 private Long subtotal;
+	 
 
 }
