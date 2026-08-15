@@ -1,4 +1,4 @@
-package com.example.ecommerce.entity;
+	package com.example.ecommerce.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -8,6 +8,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -106,7 +107,7 @@ public class CartItem {
     @Column(name = "cart_item_id")
     private Long cartItemId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cart_id", nullable = false)
     private Cart cart;
 

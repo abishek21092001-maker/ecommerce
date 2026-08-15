@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.ecommerce.dto.CartItemRequestDto;
+import com.example.ecommerce.dto.CartRequestDto;
 import com.example.ecommerce.service.impl.CartServiceImp;
 
 @RestController
@@ -17,8 +17,7 @@ public class Cartcontroller {
 	private CartServiceImp cartimp;
 	
 	@PostMapping
-	public String addcart(@RequestBody CartItemRequestDto cartitemrequestdto ) {
-		return cartimp.addcart(cartitemrequestdto);
-	}
+	public String addcart(@RequestBody CartRequestDto cartrequestdto ) {
+		return cartimp.addcart(cartrequestdto);
 
-}
+}}

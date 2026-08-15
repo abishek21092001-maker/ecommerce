@@ -19,7 +19,7 @@ public interface UserServiceImp {
 
 	String deleteuserbyid(Long id);
 
-	UserLoginResponseDTO loginuser(UserLoginRequestDTO userloginrequestdto);
+	
 
 
 

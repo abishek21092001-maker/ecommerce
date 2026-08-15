@@ -1,6 +1,7 @@
 package com.example.ecommerce.entity;
 
 import java.math.BigDecimal;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -13,11 +14,18 @@ import jakarta.persistence.*;
 @Table(name = "orders")
 public class Order {
 
+ 
+
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "order_id")
+    private Long orderId;
+
     public Order() {
 		super();
 	}
 
-	public Order(Long orderId, User user, BigDecimal totalAmount, String shippingAddress, String paymentMethod,
+	public Order(Long orderId, Userentity user, BigDecimal totalAmount, String shippingAddress, String paymentMethod,
 			String orderStatus, LocalDateTime orderDate, List<OrderItem> orderItems, LocalDateTime createdAt,
 			LocalDateTime updatedAt) {
 		super();
@@ -41,11 +49,11 @@ public class Order {
 		this.orderId = orderId;
 	}
 
-	public User getUser() {
+	public Userentity getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(Userentity user) {
 		this.user = user;
 	}
 
@@ -113,14 +121,9 @@ public class Order {
 		this.updatedAt = updatedAt;
 	}
 
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_id")
-    private Long orderId;
-
-    @ManyToOne
+	@ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private Userentity user;
 
     @Column(name = "total_amount", nullable = false, precision = 10, scale = 2)
     private BigDecimal totalAmount;

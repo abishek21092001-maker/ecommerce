@@ -1,9 +1,9 @@
 package com.example.ecommerce.service.impl;
 
-import com.example.ecommerce.dto.CartItemRequestDto;
+import com.example.ecommerce.dto.CartRequestDto;
 
 public interface CartServiceImp {
 
-	String addcart(CartItemRequestDto cartitemrequestdto);
+	String addcart(CartRequestDto cartrequestdto);
 
 }

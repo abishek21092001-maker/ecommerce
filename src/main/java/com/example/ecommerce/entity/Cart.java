@@ -2,6 +2,7 @@ package com.example.ecommerce.entity;
 
 import java.util.List;
 
+
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -18,12 +19,12 @@ import jakarta.persistence.OneToOne;
 @Entity
 public class Cart {
 	
-	@Override
-	public String toString() {
-		return "Cart []";
+
+	public Cart() {
+		super();
 	}
 
-	public Cart(Long cartid, User user, List<CartItem> cartitem, Long total, String createdat, String updatedat) {
+	public Cart(Long cartid, Userentity user, List<CartItem> cartitem, Long total, String createdat, String updatedat) {
 		super();
 		this.cartid = cartid;
 		this.user = user;
@@ -41,11 +42,11 @@ public class Cart {
 		this.cartid = cartid;
 	}
 
-	public User getUser() {
+	public Userentity getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(Userentity user) {
 		this.user = user;
 	}
 
@@ -87,12 +88,11 @@ public class Cart {
 	
 	@OneToOne
 	@JoinColumn(name = "user_id")
-	private User user;
+	private Userentity user;
 	
-	@OneToMany(mappedBy = "Cart",cascade = CascadeType.ALL)
-	@JoinColumn(name = "cart_item_id")
+	@OneToMany(mappedBy = "cart",cascade = CascadeType.ALL)
+
 	private List<CartItem> cartitem;
-	
 	@Column(name = "total_amount",precision = 10 ,scale = 2)
 	private Long total;
 	

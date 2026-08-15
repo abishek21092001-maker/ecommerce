@@ -7,6 +7,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,7 +16,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
-public class User {
+public class Userentity {
 	
 
 	@Id
@@ -23,12 +24,13 @@ public class User {
 	@Column(name= "user_id")
 	private Long userid;
 	
-	public User() {
+
+	public Userentity() {
 		super();
 	}
 
-	public User(Long userid, Role role, String name, @NotBlank String email, String rolecode, String password,
-			String accessToken, String phone, String address, LocalDateTime createdat, LocalDateTime updateddat) {
+	public Userentity(Long userid, Role role, String name, @NotBlank String email, String rolecode, String password,
+			String phone, String address, LocalDateTime createdat, LocalDateTime updateddat) {
 		super();
 		this.userid = userid;
 		this.role = role;
@@ -36,7 +38,6 @@ public class User {
 		this.email = email;
 		this.rolecode = rolecode;
 		this.password = password;
-
 		this.phone = phone;
 		this.address = address;
 		this.createdat = createdat;
@@ -91,8 +92,6 @@ public class User {
 		this.password = password;
 	}
 
-
-
 	public String getPhone() {
 		return phone;
 	}
@@ -125,7 +124,7 @@ public class User {
 		this.updateddat = updateddat;
 	}
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "role_id")
 	private Role role;
 	

@@ -1,10 +1,12 @@
 package com.example.ecommerce.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
-import com.example.ecommerce.dto.CartItemRequestDto;
-import com.example.ecommerce.entity.CartItem;
+import com.example.ecommerce.dto.CartRequestDto;
+import com.example.ecommerce.entity.Product;
+import com.example.ecommerce.entity.Userentity;
 import com.example.ecommerce.repository.CartRepository;
 import com.example.ecommerce.repository.ProductRepository;
 import com.example.ecommerce.repository.UserReository;
@@ -21,11 +23,29 @@ public class CartService implements CartServiceImp{
 	@Autowired
 	private CartRepository cartrepo;
 	
-	@Autowired
-	private CartItem cartitem;
+
 
 	@Override
-	public String addcart(CartItemRequestDto cartitemrequestdto) {
+	public String addcart(CartRequestDto cartrequestdto) {
+		
+		
+		Userentity user = userrepo.findById(cartrequestdto.getUserid()).orElseThrow(() -> new RuntimeException("User Not Found"));
+		
+		
+		
+		Product product = productrepo.findById(cartrequestdto.getProductid()).orElseThrow(() -> new RuntimeException("product Not Found"));
+		
+		
+	
+		
+		
+		
+		
+		
+		
+		
+			
+		
 		
 		return null;
 	}

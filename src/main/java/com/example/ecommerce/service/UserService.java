@@ -2,6 +2,7 @@ package com.example.ecommerce.service;
 
 import java.time.LocalDateTime;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,7 +15,7 @@ import com.example.ecommerce.dto.UserLoginResponseDTO;
 import com.example.ecommerce.dto.UserRegisterRequestDTO;
 import com.example.ecommerce.dto.UserResponseDTO;
 import com.example.ecommerce.entity.Role;
-import com.example.ecommerce.entity.User;
+import com.example.ecommerce.entity.Userentity;
 import com.example.ecommerce.excepton.ResourceNotFoundException;
 import com.example.ecommerce.repository.RoleRepository;
 import com.example.ecommerce.repository.UserReository;
@@ -39,7 +40,7 @@ public class UserService implements UserServiceImp {
 	public String registeruser(UserRegisterRequestDTO userregisterrequestDTO) {
 		
 		
-		User user = new User();
+		Userentity user = new Userentity();
 		
 		user.setName(userregisterrequestDTO.getName());
 		user.setEmail(userregisterrequestDTO.getEmail());
@@ -53,7 +54,7 @@ public class UserService implements UserServiceImp {
 		Role role = rolerepository.findById(userregisterrequestDTO.getRoleid()).orElseThrow(() -> new RuntimeException("Roleid is not found"));
 		
 		user.setRole(role);
-		User saved = userrepository.save(user);
+		Userentity saved = userrepository.save(user);
 		
 		String s = String.format("UR_" + "%03d", user.getUserid());
 		user.setRolecode(s);
@@ -69,7 +70,7 @@ public class UserService implements UserServiceImp {
 		
 		Pageable pageable = PageRequest.of(page, size);
 		
-		Page<User> pages = userrepository.findAll(pageable);
+		Page<Userentity> pages = userrepository.findAll(pageable);
 		return pages.map(user ->{
 			UserResponseDTO userresponsedto = new UserResponseDTO();
 			userresponsedto.setUser_id(user.getUserid());
@@ -88,7 +89,7 @@ public class UserService implements UserServiceImp {
 	@Override
 	public UserResponseDTO getuserbyid(Long id) {
 		
-		User user = userrepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User Id not found "));
+		Userentity user = userrepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User Id not found "));
 		
 		UserResponseDTO userresponsedto = new UserResponseDTO();
 		
@@ -105,7 +106,7 @@ public class UserService implements UserServiceImp {
 	@Override
 	public String updateuserbyid(Long id, UserRegisterRequestDTO userregisterrequestDTO) {
 		
-		User user = userrepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("user id not found"));
+		Userentity user = userrepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("user id not found"));
 		
 		user.setName(userregisterrequestDTO.getName());
 		user.setEmail(userregisterrequestDTO.getEmail());
@@ -129,32 +130,14 @@ public class UserService implements UserServiceImp {
 
 	@Override
 	public String deleteuserbyid(Long id) {
-		User user = userrepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("user not found"));
+		Userentity user = userrepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("user not found"));
 		
 		userrepository.delete(user);
 		
 		return "deleted sucessfully";
 	}
 
-	@Override
-	public UserLoginResponseDTO loginuser(UserLoginRequestDTO userloginrequestdto) {
-		
-		User user = userrepository.findByEmail(userloginrequestdto.getEmail()).orElseThrow(()-> new ResourceNotFoundException("Email id is not found"));
-		
-		if(!passwordencoder.matches(userloginrequestdto.getPassword(), user.getPassword()))
-		{
-			throw new RuntimeException("Password is not valid");
-		}
-		
-		String token = jwtservice.generatetoken(user.getEmail());
-		UserLoginResponseDTO response = new UserLoginResponseDTO();
-		
-		response.setAccessToken(token);
-		
-		
-		return response;
-	}
-	
+
 	
 
 
