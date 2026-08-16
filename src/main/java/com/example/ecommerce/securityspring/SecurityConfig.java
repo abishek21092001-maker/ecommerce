@@ -24,6 +24,7 @@ public class SecurityConfig {
 		return new BCryptPasswordEncoder();
 	}
 	
+
 	@Bean
 	public AuthenticationProvider authenticationprovider(CustomUserDetailsService cudservice,PasswordEncoder passwordencoder) {
 		
