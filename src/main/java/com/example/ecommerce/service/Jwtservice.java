@@ -1,6 +1,8 @@
 package com.example.ecommerce.service;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
+
+import javax.crypto.SecretKey;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -11,13 +13,13 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 
 
-
+	
 @Service
 public class Jwtservice {
 	
 	@Value("${jwt.secret}")
 	private  String Secrect_key ;
-	
+	// create the Jwt token
 	public String generateToken(UserDetails userdetails) {
 		return Jwts.builder()
 				.subject(userdetails.getUsername())
@@ -26,11 +28,42 @@ public class Jwtservice {
 				.signWith(getsecrectkey())
 				.compact();
 	}
-
-	private Key getsecrectkey() {
+    // create the secrect key  which should undertand by the computer
+	private SecretKey getsecrectkey() {
 		// TODO Auto-generated method stub
 		return Keys.hmacShaKeyFor(Secrect_key.getBytes(StandardCharsets.UTF_8));
 	}
+	// 
+	private String extractUsername(String token) {
+		return Jwts.parser()
+				.verifyWith(getsecrectkey())
+				.build()
+				.parseSignedClaims(token)
+				.getPayload()
+				.getSubject();
+	}
+	
+	private Boolean isValid(String token , UserDetails userdetails) {
+		
+		String Username = extractUsername(token);
+		
+		return Username.equals(userdetails.getUsername() ) && !isTokenExpired(token);
+	}
+
+	private boolean isTokenExpired(String token) {
+		// TODO Auto-generated method stub
+		Date Expiration = Jwts.parser()
+				.verifyWith(getsecrectkey())
+				.build()
+				.parseSignedClaims(token)
+				.getPayload()
+				.getExpiration();
+		return Expiration.before(new Date());
+	}
+	
+	
+	
+	
 	
 	
 	
