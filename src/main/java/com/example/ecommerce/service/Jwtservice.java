@@ -30,11 +30,11 @@ public class Jwtservice {
 	}
     // create the secrect key  which should undertand by the computer
 	private SecretKey getsecrectkey() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub	
 		return Keys.hmacShaKeyFor(Secrect_key.getBytes(StandardCharsets.UTF_8));
 	}
 	// 
-	private String extractUsername(String token) {
+	public String extractUsername(String token) {
 		return Jwts.parser()
 				.verifyWith(getsecrectkey())
 				.build()
@@ -43,14 +43,14 @@ public class Jwtservice {
 				.getSubject();
 	}
 	
-	private Boolean isValid(String token , UserDetails userdetails) {
+	public Boolean isValid(String token , UserDetails userdetails) {
 		
 		String Username = extractUsername(token);
 		
 		return Username.equals(userdetails.getUsername() ) && !isTokenExpired(token);
 	}
 
-	private boolean isTokenExpired(String token) {
+	public boolean isTokenExpired(String token) {
 		// TODO Auto-generated method stub
 		Date Expiration = Jwts.parser()
 				.verifyWith(getsecrectkey())
