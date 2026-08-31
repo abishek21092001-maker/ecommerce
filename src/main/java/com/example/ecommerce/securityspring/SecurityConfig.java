@@ -11,12 +11,28 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import com.example.ecommerce.controller.AuthController;
 import com.example.ecommerce.service.CustomUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+    private final AuthController authController;
+	private final JwtFilter jwtFilter;
+	private final CustomAuthenticaltionEntrypoint cstomentrypoint;
+	private final CustomAcessdeniedEntrypoint customacessdenired;
+
+    public SecurityConfig(JwtFilter jwtFilter,
+    		AuthController authController,
+    		CustomAuthenticaltionEntrypoint cstomentrypoint,
+    		CustomAcessdeniedEntrypoint customacessdenired) {
+        this.jwtFilter = jwtFilter;
+        this.authController = authController;
+        this.cstomentrypoint = cstomentrypoint;
+        this.customacessdenired =customacessdenired;
+    }
 	
 	@Bean
 	public PasswordEncoder passwordencoder() {
@@ -39,13 +55,26 @@ public class SecurityConfig {
 	}
 	
 	@Bean
-	public SecurityFilterChain securityfilterchain(HttpSecurity http) throws Exception{
-		
-		http
-		.csrf(csrf -> csrf.disable())
-		.authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
-		
-		return http.build();
+	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+	    http
+	        .csrf(csrf -> csrf.disable())
+
+	        .authorizeHttpRequests(auth -> auth
+	            .requestMatchers("/api/auth/login").permitAll()
+	            .requestMatchers("api/category/**").hasRole("Admin")
+	            .requestMatchers("/api/cart/**").hasRole("User")
+	            .anyRequest().authenticated()
+	        )
+	        .exceptionHandling(exception -> exception.authenticationEntryPoint(cstomentrypoint)
+	        		.accessDeniedHandler(customacessdenired))
+
+	        .addFilterBefore(
+	            jwtFilter,
+	            UsernamePasswordAuthenticationFilter.class
+	        );
+
+	    return http.build();
 	}
 	
 

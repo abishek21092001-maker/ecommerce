@@ -1,11 +1,11 @@
 package com.example.ecommerce.service;
 import java.nio.charset.StandardCharsets;
-import java.security.Key;
-
-import javax.crypto.SecretKey;
 import java.util.Date;
 
+import javax.crypto.SecretKey;
+
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -20,9 +20,19 @@ public class Jwtservice {
 	@Value("${jwt.secret}")
 	private  String Secrect_key ;
 	// create the Jwt token
-	public String generateToken(UserDetails userdetails) {
+	public String generateToken(Authentication authentication) {
+		
+		String email = authentication.getName();
+		
+		String role = authentication.getAuthorities()
+				.stream()
+				.findFirst()
+				.get()
+				.getAuthority();
+		
 		return Jwts.builder()
-				.subject(userdetails.getUsername())
+				.subject(email)
+				.claim("role", role)
 				.issuedAt(new Date())
 				.expiration(new Date(System.currentTimeMillis() + 1000 *60 * 30))
 				.signWith(getsecrectkey())
@@ -30,11 +40,11 @@ public class Jwtservice {
 	}
     // create the secrect key  which should undertand by the computer
 	private SecretKey getsecrectkey() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub	
 		return Keys.hmacShaKeyFor(Secrect_key.getBytes(StandardCharsets.UTF_8));
 	}
 	// 
-	private String extractUsername(String token) {
+	public String extractUsername(String token) {
 		return Jwts.parser()
 				.verifyWith(getsecrectkey())
 				.build()
@@ -43,14 +53,14 @@ public class Jwtservice {
 				.getSubject();
 	}
 	
-	private Boolean isValid(String token , UserDetails userdetails) {
+	public Boolean isValid(String token , UserDetails userdetails) {
 		
 		String Username = extractUsername(token);
 		
 		return Username.equals(userdetails.getUsername() ) && !isTokenExpired(token);
 	}
 
-	private boolean isTokenExpired(String token) {
+	public boolean isTokenExpired(String token) {
 		// TODO Auto-generated method stub
 		Date Expiration = Jwts.parser()
 				.verifyWith(getsecrectkey())
@@ -61,6 +71,16 @@ public class Jwtservice {
 		return Expiration.before(new Date());
 	}
 	
+	
+	public String extractRole(String token) {
+
+	    return Jwts.parser()
+	            .verifyWith(getsecrectkey())
+	            .build()
+	            .parseSignedClaims(token)
+	            .getPayload()
+	            .get("role", String.class);
+	}
 	
 	
 	
