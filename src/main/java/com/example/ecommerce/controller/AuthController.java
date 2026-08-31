@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.example.ecommerce.dto.UserLoginRequestDTO;
 
 @RestController
@@ -20,6 +19,7 @@ public class AuthController {
 	public AuthController(AuthenticationManager authenticationmanager) {
 		this.authenticationmanager = authenticationmanager;
 	}
+	
 	@PostMapping("/login")
 	public ResponseEntity<String>login(@RequestBody UserLoginRequestDTO responsedto){
 		
