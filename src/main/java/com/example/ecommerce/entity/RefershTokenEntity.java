@@ -13,25 +13,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
-@Table(name ="RefershToken")
+@Table(name ="RefershTokenEntity")
 public class RefershTokenEntity {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long generateid;
 	
-	public RefershTokenEntity() {
-		super();
-	}
-
-	public RefershTokenEntity(Long generateid, String refershtoken, LocalDateTime expirydate, LocalDateTime createddate,
-			Userentity user) {
-		super();
-		this.generateid = generateid;
-		this.refershtoken = refershtoken;
-		this.expirydate = expirydate;
-		this.createddate = createddate;
-		this.user = user;
-	}
-
 	public Long getGenerateid() {
 		return generateid;
 	}
@@ -56,6 +47,14 @@ public class RefershTokenEntity {
 		this.expirydate = expirydate;
 	}
 
+	public LocalDateTime getOrginalexpirydate() {
+		return orginalexpirydate;
+	}
+
+	public void setOrginalexpirydate(LocalDateTime orginalexpirydate) {
+		this.orginalexpirydate = orginalexpirydate;
+	}
+
 	public LocalDateTime getCreateddate() {
 		return createddate;
 	}
@@ -72,15 +71,29 @@ public class RefershTokenEntity {
 		this.user = user;
 	}
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long generateid;
-	
+	public RefershTokenEntity() {
+		super();
+	}
+
+	public RefershTokenEntity(Long generateid, String refershtoken, LocalDateTime expirydate,
+			@NotBlank LocalDateTime orginalexpirydate, LocalDateTime createddate, Userentity user) {
+		super();
+		this.generateid = generateid;
+		this.refershtoken = refershtoken;
+		this.expirydate = expirydate;
+		this.orginalexpirydate = orginalexpirydate;
+		this.createddate = createddate;
+		this.user = user;
+	}
+
 	@Column(nullable = false,unique = true)
 	private String refershtoken;
 	
 	@Column(nullable = false)
 	private LocalDateTime expirydate;
+	
+	@NotBlank
+	private LocalDateTime orginalexpirydate;
 	
 	@CreatedDate
 	private LocalDateTime createddate;

@@ -9,8 +9,10 @@ import com.example.ecommerce.entity.Userentity;
 
 public interface RefershTokenRepository extends JpaRepository<RefershTokenEntity,Long> {
 	
-	Optional <RefershTokenEntity> findyBytoken(String token) ;
+	Optional <RefershTokenEntity> findByrefershtoken(String refershtoken) ;
 	void deleteByuser(Userentity user);
+	
+	Optional<RefershTokenEntity> findByuser(Userentity user);
 	
 	
 
