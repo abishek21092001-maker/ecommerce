@@ -1,6 +1,8 @@
 package com.example.ecommerce.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +19,9 @@ public class Cartcontroller {
 	private CartServiceImp cartimp;
 	
 	@PostMapping
-	public String addcart(@RequestBody CartRequestDto cartrequestdto ) {
-		return cartimp.addcart(cartrequestdto);
+	public ResponseEntity addcart(@RequestBody CartRequestDto cartrequestdto ) {
+		CartRequestDto dto =  cartimp.addcart(cartrequestdto);
+		 
+		 return ResponseEntity.status(HttpStatus.CREATED).body(dto);
 
 }}

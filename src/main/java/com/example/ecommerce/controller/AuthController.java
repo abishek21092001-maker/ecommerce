@@ -31,6 +31,9 @@ public class AuthController {
 
     @Autowired
     private UserReository userrepo;
+    
+    @Autowired
+    private UserReository userrepository;
 
     @Autowired
     private RefershTokenService refershtokenservice;
@@ -69,18 +72,34 @@ public class AuthController {
                 );
 
         // 4. Create refresh token
-        RefershTokenEntity refreshtoken =
+        RefershTokenEntity refreshstoken =
                 refershtokenservice.createrefershtoken(user);
 
         // 5. Create response
         RefershTokenDto response =
                 new RefershTokenDto(
                         accesstoken,
-                        refreshtoken.getRefershtoken(),
+                        refreshstoken.getRefershtoken(),
                         "Bearer"
                 );
 
         // 6. Return both tokens
         return ResponseEntity.ok(response);
     }
+    
+    @Autowired
+    private RefershTokenService RefershTokenService;
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout( Authentication authentication){
+    	
+    	String email = authentication.getName();
+    	
+    	Userentity userentity = userrepository.findByEmail(email).orElseThrow(() -> new RuntimeException("Email is not found"));
+    	
+    	RefershTokenService.deletebyuser(userentity);
+    	
+    	
+    	return ResponseEntity.ok("sucessfully deleted");
+    }
+    
 }

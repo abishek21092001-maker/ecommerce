@@ -83,13 +83,13 @@ public class Cart {
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long cartid;
 	
 	@OneToOne
 	@JoinColumn(name = "user_id")
 	private Userentity user;
-	
+			
 	@OneToMany(mappedBy = "cart",cascade = CascadeType.ALL)
 
 	private List<CartItem> cartitem;

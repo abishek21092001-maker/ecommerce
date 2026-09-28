@@ -19,17 +19,17 @@ import com.example.ecommerce.service.CustomUserDetailsService;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final AuthController authController;
+
 	private final JwtFilter jwtFilter;
 	private final CustomAuthenticaltionEntrypoint cstomentrypoint;
 	private final CustomAcessdeniedEntrypoint customacessdenired;
 
     public SecurityConfig(JwtFilter jwtFilter,
-    		AuthController authController,
+
     		CustomAuthenticaltionEntrypoint cstomentrypoint,
     		CustomAcessdeniedEntrypoint customacessdenired) {
         this.jwtFilter = jwtFilter;
-        this.authController = authController;
+
         this.cstomentrypoint = cstomentrypoint;
         this.customacessdenired =customacessdenired;
     }
@@ -62,8 +62,8 @@ public class SecurityConfig {
 
 	        .authorizeHttpRequests(auth -> auth
 	            .requestMatchers("/api/auth/login").permitAll()
-	            .requestMatchers("api/category/**").hasRole("Admin")
-	            .requestMatchers("/api/cart/**").hasRole("User")
+	            .requestMatchers("/api/category").hasRole("Admin")
+	            .requestMatchers("/api/cart").hasRole("User")
 	            .anyRequest().authenticated()
 	        )
 	        .exceptionHandling(exception -> exception.authenticationEntryPoint(cstomentrypoint)

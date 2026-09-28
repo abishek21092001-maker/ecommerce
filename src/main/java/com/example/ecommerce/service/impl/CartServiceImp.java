@@ -4,6 +4,6 @@ import com.example.ecommerce.dto.CartRequestDto;
 
 public interface CartServiceImp {
 
-	String addcart(CartRequestDto cartrequestdto);
+	CartRequestDto addcart(CartRequestDto cartrequestdto);
 
 }
