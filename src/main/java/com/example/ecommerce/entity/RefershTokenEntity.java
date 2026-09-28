@@ -17,7 +17,8 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name ="RefershToken")
 public class RefershTokenEntity {
-	
+
+
 	public RefershTokenEntity() {
 		super();
 	}

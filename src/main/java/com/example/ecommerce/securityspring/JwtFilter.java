@@ -36,7 +36,7 @@ public class JwtFilter extends OncePerRequestFilter {
         String authheader =
                 request.getHeader("Authorization");
 
-        System.out.println("Authorization: " + authheader);
+  
 
         // 2. Check Bearer token
         if (authheader == null ||
@@ -59,8 +59,8 @@ public class JwtFilter extends OncePerRequestFilter {
             String role =
                     jwtservice.extractRole(token);
 
-            System.out.println("Username: " + username);
-            System.out.println("Role: " + role);
+//            System.out.println("Username: " + username);
+//            System.out.println("Role: " + role);
 
             // 6. Check if user is not already authenticated
             if (username != null &&

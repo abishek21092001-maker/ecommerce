@@ -18,6 +18,7 @@ public class RefershTokenService {
 	public RefershTokenEntity createrefershtoken(Userentity user) {
 		
 		refershtokenrepo.deleteByuser(user);
+		refershtokenrepo.flush();
 		RefershTokenEntity refreshtoken = new RefershTokenEntity();
 		refreshtoken.setExpirydate(LocalDateTime.now().plusDays(7));
 		refreshtoken.setUser(user);
@@ -40,5 +41,6 @@ public class RefershTokenService {
 	    
 		
 	}
+		
 
 }
