@@ -1,5 +1,6 @@
 package com.example.ecommerce.entity;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.CreatedDate;
@@ -25,7 +26,7 @@ public class Product {
 	}
 
 	public Product(Long productid, Category categoryid, String productcode, String name, String description,
-			double price, int stock, String imageurl, LocalDateTime createdat, LocalDateTime updatedat) {
+			BigDecimal price, int stock, String imageurl, LocalDateTime createdat, LocalDateTime updatedat) {
 		super();
 		this.productid = productid;
 		this.categoryid = categoryid;
@@ -79,11 +80,11 @@ public class Product {
 		this.description = description;
 	}
 
-	public double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 
@@ -128,7 +129,7 @@ public class Product {
 	
 	private String description;
 	
-	private double price;
+	private BigDecimal price;
 	
 	private int stock; 
 	

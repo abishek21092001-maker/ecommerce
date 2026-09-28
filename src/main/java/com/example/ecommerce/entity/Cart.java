@@ -1,7 +1,7 @@
 package com.example.ecommerce.entity;
 
+import java.math.BigDecimal;
 import java.util.List;
-
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -24,7 +24,7 @@ public class Cart {
 		super();
 	}
 
-	public Cart(Long cartid, Userentity user, List<CartItem> cartitem, Long total, String createdat, String updatedat) {
+	public Cart(Long cartid, Userentity user, List<CartItem> cartitem, BigDecimal total, String createdat, String updatedat) {
 		super();
 		this.cartid = cartid;
 		this.user = user;
@@ -58,11 +58,11 @@ public class Cart {
 		this.cartitem = cartitem;
 	}
 
-	public Long getTotal() {
+	public BigDecimal getTotal() {
 		return total;
 	}
 
-	public void setTotal(Long total) {
+	public void setTotal(BigDecimal total) {
 		this.total = total;
 	}
 
@@ -94,7 +94,7 @@ public class Cart {
 
 	private List<CartItem> cartitem;
 	@Column(name = "total_amount",precision = 10 ,scale = 2)
-	private Long total;
+	private BigDecimal total;
 	
 	@CreatedDate
 	@Column(name = "created_at")

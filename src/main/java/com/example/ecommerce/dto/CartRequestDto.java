@@ -1,25 +1,10 @@
 package com.example.ecommerce.dto;
 
-import java.util.List;
+import java.math.BigDecimal;
 
-
-import com.example.ecommerce.entity.CartItem;
-import com.example.ecommerce.entity.Userentity;
 
 public class CartRequestDto {
-	
 
-
-	public CartRequestDto() {
-		super();
-	}
-	public CartRequestDto(Long userid, Long productid, List<CartItem> cartitem, Long total) {
-		super();
-		this.userid = userid;
-		this.productid = productid;
-		this.cartitem = cartitem;
-		this.total = total;
-	}
 	public Long getUserid() {
 		return userid;
 	}
@@ -32,22 +17,29 @@ public class CartRequestDto {
 	public void setProductid(Long productid) {
 		this.productid = productid;
 	}
-	public List<CartItem> getCartitem() {
-		return cartitem;
+	public BigDecimal getQuantity() {
+		return quantity;
 	}
-	public void setCartitem(List<CartItem> cartitem) {
-		this.cartitem = cartitem;
+	public void setQuantity(BigDecimal quantity) {
+		this.quantity = quantity;
 	}
-	public Long getTotal() {
-		return total;
+
+	
+	public CartRequestDto() {
+		super();
 	}
-	public void setTotal(Long total) {
-		this.total = total;
+	public CartRequestDto(Long userid, Long productid, BigDecimal quantity) {
+		super();
+		this.userid = userid;
+		this.productid = productid;
+		this.quantity = quantity;
+		
 	}
 	private Long userid;
 	private Long productid;
 	
-	private List<CartItem> cartitem;
-	private Long total;
+	private BigDecimal quantity;
+	
+
 
 }
