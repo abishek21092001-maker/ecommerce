@@ -53,12 +53,12 @@ public class Jwtservice {
 				.getSubject();
 	}
 	
-	public Boolean isValid(String token , UserDetails userdetails) {
-		
-		String Username = extractUsername(token);
-		
-		return Username.equals(userdetails.getUsername() ) && !isTokenExpired(token);
-	}
+//	public Boolean isValid(String token , UserDetails userdetails) {
+//		
+//		String Username = extractUsername(token);
+//		
+//		return Username.equals(userdetails.getUsername() ) && !isTokenExpired(token);
+//	}
 
 	public boolean isTokenExpired(String token) {
 		// TODO Auto-generated method stub

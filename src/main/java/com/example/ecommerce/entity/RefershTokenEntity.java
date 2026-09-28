@@ -19,10 +19,12 @@ import jakarta.validation.constraints.NotBlank;
 @Table(name ="RefershTokenEntity")
 public class RefershTokenEntity {
 
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long generateid;
 	
+
 	public Long getGenerateid() {
 		return generateid;
 	}

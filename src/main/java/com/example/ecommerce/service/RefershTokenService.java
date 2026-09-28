@@ -19,6 +19,7 @@ public class RefershTokenService {
 	public RefershTokenEntity createrefershtoken(Userentity user) {
 		
 		refershtokenrepo.deleteByuser(user);
+
 		RefershTokenEntity refreshstoken = new RefershTokenEntity();
 		refreshstoken.setRefershtoken(
 	                UUID.randomUUID().toString()
@@ -26,6 +27,7 @@ public class RefershTokenService {
 		refreshstoken.setExpirydate(LocalDateTime.now().plusDays(7));
 		refreshstoken.setUser(user);
 		return refershtokenrepo.save(refreshstoken);
+
 	}
 		
 		public RefershTokenEntity verifyExpiration(RefershTokenEntity refreshsToken) {
@@ -54,6 +56,7 @@ public class RefershTokenService {
 	    
 		
 	}
+		
 
 		public void deletebyuser(Userentity userentity) {
 			// TODO Auto-generated method stub
