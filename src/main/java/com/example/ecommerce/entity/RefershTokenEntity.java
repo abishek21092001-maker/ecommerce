@@ -14,6 +14,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name ="RefershTokenEntity")
@@ -94,7 +95,7 @@ public class RefershTokenEntity {
 	@Column(nullable = false)
 	private LocalDateTime expirydate;
 	
-	@NotBlank
+
 	private LocalDateTime orginalexpirydate;
 	
 	@CreatedDate

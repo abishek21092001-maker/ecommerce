@@ -7,8 +7,7 @@ public class ProductRequestDto {
 	public ProductRequestDto() {
 		super();
 	}
-	public ProductRequestDto(Long productid, String name, String description, BigDecimal price, Long categoryid, int stock,
-			String imageurl) {
+	public ProductRequestDto(Long productid, String name, String description, BigDecimal price, Long categoryid, int stock) {
 		super();
 		this.productid = productid;
 		this.name = name;
@@ -16,7 +15,7 @@ public class ProductRequestDto {
 		this.price = price;
 		this.categoryid = categoryid;
 		this.stock = stock;
-		this.imageurl = imageurl;
+
 	}
 	public Long getProductid() {
 		return productid;
@@ -54,12 +53,7 @@ public class ProductRequestDto {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
-	public String getImageurl() {
-		return imageurl;
-	}
-	public void setImageurl(String imageurl) {
-		this.imageurl = imageurl;
-	}
+
 	private Long productid;
 	private String name;
 	
@@ -70,6 +64,6 @@ public class ProductRequestDto {
 	private Long categoryid;
 	
 	private int stock; 
-	private String imageurl;
+
 
 }

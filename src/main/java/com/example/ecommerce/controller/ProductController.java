@@ -27,7 +27,7 @@ public class ProductController {
 	private ProductServiceImp productserviceimp;
 	
 	@PostMapping
-	public String addproduct(@ModelAttribute ProductRequestDto productrequestdto, @RequestParam MultipartFile image) throws IOException{
+	public String addproduct(@ModelAttribute ProductRequestDto productrequestdto, @RequestParam("imageurl") MultipartFile image) throws IOException{
 		return productserviceimp.addproduct(productrequestdto,image);
 	}
 	

@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.ecommerce.entity.RefershTokenEntity;
 import com.example.ecommerce.entity.Userentity;
@@ -16,15 +17,18 @@ public class RefershTokenService {
 	@Autowired
 	private RefershTokenRepository refershtokenrepo ;
 	
+	@Transactional
 	public RefershTokenEntity createrefershtoken(Userentity user) {
 		
 		refershtokenrepo.deleteByuser(user);
+		refershtokenrepo.flush();
 
 		RefershTokenEntity refreshstoken = new RefershTokenEntity();
 		refreshstoken.setRefershtoken(
 	                UUID.randomUUID().toString()
 	        );
 		refreshstoken.setExpirydate(LocalDateTime.now().plusDays(7));
+		refreshstoken.setOrginalexpirydate(LocalDateTime.now().plusDays(30));
 		refreshstoken.setUser(user);
 		return refershtokenrepo.save(refreshstoken);
 
@@ -42,7 +46,7 @@ public class RefershTokenService {
 	            );
 	        }
 	        
-	        if (refreshsToken.getOrginalexpirydate().isAfter(LocalDateTime.now())) {
+	        if (refreshsToken.getOrginalexpirydate().isBefore(LocalDateTime.now())) {
 	        	refershtokenrepo.delete(refreshsToken);
 
 	            throw new RuntimeException(

@@ -3,6 +3,7 @@ package com.example.ecommerce.dto;
 import java.math.BigDecimal;
 
 
+
 import java.util.List;
 
 public class CartRequestDto {
@@ -34,16 +35,16 @@ public class CartRequestDto {
 	public void setCartitem(List<?> cartitem) {
 		this.cartitem = cartitem;
 	}
-	public Long getTotal() {
+	public BigDecimal getTotal() {
 		return total;
 	}
-	public void setTotal(Long total) {
+	public void setTotal(BigDecimal total) {
 		this.total = total;
 	}
 	public CartRequestDto() {
 		super();
 	}
-	public CartRequestDto(Long userid, Long productid, BigDecimal quantity, List<?> cartitem, Long total) {
+	public CartRequestDto(Long userid, Long productid, BigDecimal quantity, List<?> cartitem, BigDecimal total) {
 		super();
 		this.userid = userid;
 		this.productid = productid;
@@ -55,7 +56,7 @@ public class CartRequestDto {
 	private Long productid;
 	private BigDecimal quantity;
 	private List<?> cartitem;
-	private Long total;	
+	private BigDecimal total;	
 	
 
 
