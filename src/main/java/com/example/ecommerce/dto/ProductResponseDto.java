@@ -43,7 +43,9 @@ public class ProductResponseDto {
 	public void setImageurl(String imageurl) {
 		this.imageurl = imageurl;
 	}
-	public ProductResponseDto(String product_id, String name, String description, BigDecimal price, int stock,
+
+	 public ProductResponseDto(String product_id, String name, String description, BigDecimal price, int stock,
+
 			String imageurl) {
 		super();
 		this.product_id = product_id;
