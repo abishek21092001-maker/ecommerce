@@ -1,9 +1,13 @@
 package com.example.ecommerce.dto;
 
+import java.math.BigDecimal;
+
 public class ProductResponseDto {
 	
-	private String product_id;
-	 public String getProduct_id() {
+	public ProductResponseDto() {
+		super();
+	}
+	public String getProduct_id() {
 		return product_id;
 	}
 	public void setProduct_id(String product_id) {
@@ -21,10 +25,10 @@ public class ProductResponseDto {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
-	public void setPrice(double price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 	public int getStock() {
@@ -39,10 +43,7 @@ public class ProductResponseDto {
 	public void setImageurl(String imageurl) {
 		this.imageurl = imageurl;
 	}
-	 public ProductResponseDto() {
-		super();
-	}
-	 public ProductResponseDto(String product_id, String name, String description, double price, int stock,
+	public ProductResponseDto(String product_id, String name, String description, BigDecimal price, int stock,
 			String imageurl) {
 		super();
 		this.product_id = product_id;
@@ -52,11 +53,13 @@ public class ProductResponseDto {
 		this.stock = stock;
 		this.imageurl = imageurl;
 	}
+	private String product_id;
+
 	 private String name;
 		
 		private String description;
 		
-		private double price;
+		private BigDecimal price;
 		
 		private int stock; 
 		private String imageurl;

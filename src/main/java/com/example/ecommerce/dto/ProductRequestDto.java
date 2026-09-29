@@ -1,11 +1,13 @@
 package com.example.ecommerce.dto;
 
+import java.math.BigDecimal;
+
 public class ProductRequestDto {
   
 	public ProductRequestDto() {
 		super();
 	}
-	public ProductRequestDto(Long productid, String name, String description, double price, Long categoryid, int stock,
+	public ProductRequestDto(Long productid, String name, String description, BigDecimal price, Long categoryid, int stock,
 			String imageurl) {
 		super();
 		this.productid = productid;
@@ -34,10 +36,10 @@ public class ProductRequestDto {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
-	public void setPrice(double price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 	public Long getCategoryid() {
@@ -63,7 +65,7 @@ public class ProductRequestDto {
 	
 	private String description;
 	
-	private double price;
+	private BigDecimal price;
 	
 	private Long categoryid;
 	

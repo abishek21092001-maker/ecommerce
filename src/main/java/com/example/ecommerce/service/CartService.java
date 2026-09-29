@@ -29,17 +29,12 @@ public class CartService implements CartServiceImp{
 	@Override
 	public CartRequestDto addcart(CartRequestDto cartrequestdto) {
 		
-		Long id = cartrequestdto.getProductid();
-		Authentication  authentication = SecurityContextHolder.getContext().getAuthentication();
-		String email = authentication.getName();
-		Userentity user = uspero.findByEmail(email).orElseThrow(() -> new RuntimeException("Email not found"));
-		Cart cart = cartrepo.findByuser(user).orElseThrow(() -> new RuntimeException("User not found"));
-		Product pro = productrepo.findById(id).orElseThrow(null);
+
 		
-		CartItem item = new CartItem();
 		
-		item.setProduct(pro);
-		item.set
+		
+		
+		
 		
 		
 		

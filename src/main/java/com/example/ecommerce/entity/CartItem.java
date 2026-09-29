@@ -25,7 +25,7 @@ public class CartItem {
 		super();
 	}
 
-	public CartItem(Long cartItemId, Cart cart, Product product, Integer quantity, BigDecimal price, Long subtotal,
+	public CartItem(Long cartItemId, Cart cart, Product product, BigDecimal quantity, BigDecimal price, BigDecimal subtotal,
 			LocalDateTime createdAt, LocalDateTime updatedAt) {
 		super();
 		this.cartItemId = cartItemId;
@@ -62,11 +62,11 @@ public class CartItem {
 		this.product = product;
 	}
 
-	public Integer getQuantity() {
+	public BigDecimal getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(Integer quantity) {
+	public void setQuantity(BigDecimal quantity) {
 		this.quantity = quantity;
 	}
 
@@ -78,11 +78,11 @@ public class CartItem {
 		this.price = price;
 	}
 
-	public Long getSubtotal() {
+	public BigDecimal getSubtotal() {
 		return subtotal;
 	}
 
-	public void setSubtotal(Long subtotal) {
+	public void setSubtotal(BigDecimal subtotal) {
 		this.subtotal = subtotal;
 	}
 
@@ -116,13 +116,13 @@ public class CartItem {
     private Product product;
 
     @Column(nullable = false)
-    private Integer quantity;
+    private BigDecimal quantity;
 
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
     
     @Column(precision = 10, scale = 2)
-    private Long subtotal;
+    private BigDecimal subtotal;
 
     @CreatedDate
     @Column(name = "created_at", updatable = false)
