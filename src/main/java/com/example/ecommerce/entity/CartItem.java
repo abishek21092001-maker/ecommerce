@@ -103,7 +103,7 @@ public class CartItem {
 	}
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "cart_item_id")
     private Long cartItemId;
 

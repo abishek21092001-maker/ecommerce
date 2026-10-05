@@ -1,6 +1,7 @@
 package com.example.ecommerce.entity;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.annotation.CreatedDate;
@@ -20,11 +21,16 @@ import jakarta.persistence.OneToOne;
 public class Cart {
 	
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long cartid;
+	
 	public Cart() {
 		super();
 	}
 
-	public Cart(Long cartid, Userentity user, List<CartItem> cartitem, BigDecimal total, String createdat, String updatedat) {
+	public Cart(Long cartid, Userentity user, List<CartItem> cartitem, BigDecimal total, String createdat,
+			String updatedat) {
 		super();
 		this.cartid = cartid;
 		this.user = user;
@@ -82,17 +88,13 @@ public class Cart {
 		this.updatedat = updatedat;
 	}
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long cartid;
-	
 	@OneToOne
 	@JoinColumn(name = "user_id")
 	private Userentity user;
 			
 	@OneToMany(mappedBy = "cart",cascade = CascadeType.ALL)
 
-	private List<CartItem> cartitem;
+	private List<CartItem> cartitem = new ArrayList<>();
 	@Column(name = "total_amount",precision = 10 ,scale = 2)
 	private BigDecimal total;
 	

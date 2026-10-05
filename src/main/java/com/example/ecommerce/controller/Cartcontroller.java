@@ -20,8 +20,8 @@ public class Cartcontroller {
 	
 	@PostMapping
 	public ResponseEntity addcart(@RequestBody CartRequestDto cartrequestdto ) {
-		CartRequestDto dto =  cartimp.addcart(cartrequestdto);
+		cartimp.addcart(cartrequestdto);
 		 
-		 return ResponseEntity.status(HttpStatus.CREATED).body(dto);
+		 return ResponseEntity.status(HttpStatus.CREATED).body("created");
 
 }}

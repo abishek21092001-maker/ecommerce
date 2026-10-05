@@ -61,10 +61,15 @@ public class SecurityConfig {
 	        .csrf(csrf -> csrf.disable())
 
 	        .authorizeHttpRequests(auth -> auth
-	            .requestMatchers("/api/auth/login").permitAll()
-	            .requestMatchers("/api/category").hasRole("Admin")
-	            .requestMatchers("/api/cart").hasRole("User")
+	            .requestMatchers("/api/auth/**").permitAll()
+	            .requestMatchers("/api/role/**").permitAll()
+	            .requestMatchers("/actuator/**").permitAll()
+	            .requestMatchers("/api/user/").permitAll()
+	            .requestMatchers("/api/category").hasRole("User")
+	            .requestMatchers("/api/cart").hasRole("user")
+	            .requestMatchers("/api/product").hasAnyRole("user")
 	            .anyRequest().authenticated()
+	            
 	        )
 	        .exceptionHandling(exception -> exception.authenticationEntryPoint(cstomentrypoint)
 	        		.accessDeniedHandler(customacessdenired))

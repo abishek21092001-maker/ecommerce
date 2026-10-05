@@ -4,8 +4,10 @@ import java.math.BigDecimal;
 
 public class ProductResponseDto {
 	
-	private String product_id;
-	 public String getProduct_id() {
+	public ProductResponseDto() {
+		super();
+	}
+	public String getProduct_id() {
 		return product_id;
 	}
 	public void setProduct_id(String product_id) {
@@ -41,10 +43,9 @@ public class ProductResponseDto {
 	public void setImageurl(String imageurl) {
 		this.imageurl = imageurl;
 	}
-	 public ProductResponseDto() {
-		super();
-	}
+
 	 public ProductResponseDto(String product_id, String name, String description, BigDecimal price, int stock,
+
 			String imageurl) {
 		super();
 		this.product_id = product_id;
@@ -54,6 +55,8 @@ public class ProductResponseDto {
 		this.stock = stock;
 		this.imageurl = imageurl;
 	}
+	private String product_id;
+
 	 private String name;
 		
 		private String description;

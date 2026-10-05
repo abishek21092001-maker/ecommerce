@@ -24,7 +24,7 @@ public class RoleService implements RoleServiceImp{
 		
 		Role role = new Role();
 		
-		role.setName(rolereqeuestdto.getName());
+		role.setName(rolereqeuestdto.getName().toLowerCase());
 		role.setDescription(rolereqeuestdto.getDescription());
 		role.setCreatedat(LocalDateTime.now());
 		role.setUpdatedat(LocalDateTime.now());
