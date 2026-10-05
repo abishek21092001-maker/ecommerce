@@ -107,7 +107,7 @@ public class CartItem {
     @Column(name = "cart_item_id")
     private Long cartItemId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "cart_id", nullable = false)
     private Cart cart;
 
