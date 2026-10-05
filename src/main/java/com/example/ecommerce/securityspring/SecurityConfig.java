@@ -62,12 +62,14 @@ public class SecurityConfig {
 
 	        .authorizeHttpRequests(auth -> auth
 	            .requestMatchers("/api/auth/**").permitAll()
-	            .requestMatchers("/api/role").permitAll()
-	            .requestMatchers("/api/user/**").permitAll()
+	            .requestMatchers("/api/role/**").permitAll()
+	            .requestMatchers("/actuator/**").permitAll()
+	            .requestMatchers("/api/user/").permitAll()
 	            .requestMatchers("/api/category").hasRole("User")
 	            .requestMatchers("/api/cart").hasRole("user")
 	            .requestMatchers("/api/product").hasAnyRole("user")
 	            .anyRequest().authenticated()
+	            
 	        )
 	        .exceptionHandling(exception -> exception.authenticationEntryPoint(cstomentrypoint)
 	        		.accessDeniedHandler(customacessdenired))

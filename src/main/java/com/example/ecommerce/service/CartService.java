@@ -1,13 +1,13 @@
 package com.example.ecommerce.service;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import com.example.ecommerce.dto.CartItemResponseDto;
 import com.example.ecommerce.dto.CartRequestDto;
 import com.example.ecommerce.dto.CartResponseDto;
 import com.example.ecommerce.entity.Cart;
@@ -54,13 +54,23 @@ public class CartService implements CartServiceImp{
 		});
 		
 		Product pro = productrepo.findById(id).orElseThrow(() -> new RuntimeException("product not found"));
+		
+	     
         CartItem item = new CartItem();
+        Optional<CartItem> existingItem = cartitems.findByProductAndCart(pro, cart);
+	     if (existingItem.isPresent()) {
+	    	 item = existingItem.get();
+	    	 System.out.println("thiss...................." + item);
+	    	item.setQuantity( item.getQuantity().add(cartrequestdto.getQuantity()));
+	     }
+	     else {
 		item.setProduct(pro);
 		item.setPrice(pro.getPrice());
 		item.setCart(cart);
 		BigDecimal subtotal = pro.getPrice().multiply(cartrequestdto.getQuantity());
 		item.setSubtotal(subtotal);
 		item.setQuantity(cartrequestdto.getQuantity());
+		
 		CartItem cartitem_saved = cartitems.save(item);
 		BigDecimal total = cart.getCartitem()
 		        .stream()
@@ -68,16 +78,15 @@ public class CartService implements CartServiceImp{
 		        .reduce(BigDecimal.ZERO, BigDecimal::add);
 
 		  cart.setTotal(total);
-
+	     }
 		  Cart cart_saved =cartrepo.save(cart);
 		  
 		  CartResponseDto response = new CartResponseDto();
 		  response.setTotal(cart_saved.getTotal());
 		  
-		  
-		
-		
-	
+		   cart_saved.getCartitem()
+		  .stream()
+		  .forEach(name -> System.out.println(name));
 		  response.setCart(null);
 		
 		return response;
