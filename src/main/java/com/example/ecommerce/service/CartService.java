@@ -1,6 +1,8 @@
 package com.example.ecommerce.service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.example.ecommerce.dto.CartItemResponseDto;
 import com.example.ecommerce.dto.CartRequestDto;
 import com.example.ecommerce.dto.CartResponseDto;
 import com.example.ecommerce.entity.Cart;
@@ -82,15 +85,32 @@ public class CartService implements CartServiceImp{
 		  Cart cart_saved =cartrepo.save(cart);
 		  
 		  CartResponseDto response = new CartResponseDto();
-		  response.setTotal(cart_saved.getTotal());
 		  
-		   cart_saved.getCartitem()
-		  .stream()
-		  .forEach(name -> System.out.println(name));
-		  response.setCart(null);
+		  response.setTotal(cart_saved.getTotal());
+		  List<CartItemResponseDto> cartitem = new ArrayList<>();
+		  
+		  for(CartItem cartitm : cart.getCartitem()) {
+			  
+			  CartItemResponseDto dto = new CartItemResponseDto();
+			  dto.setProduct(cartitm.getProduct().getName());
+			  dto.setPrice(cartitm.getPrice());
+			  dto.setQuantity(cartitm.getQuantity());
+			  dto.setSubtotal(cartitm.getSubtotal());
+			  
+			  cartitem.add(dto);
+		  }
+		  
+		  response.setCart(cartitem);
 		
 		return response;
 
+	}
+
+
+	@Override
+	public void updatebyid(Long id, CartRequestDto cartrequestdto) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 

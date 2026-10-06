@@ -2,22 +2,21 @@ package com.example.ecommerce.dto;
 
 import java.math.BigDecimal;
 
-import com.example.ecommerce.entity.Cart;
-import com.example.ecommerce.entity.Product;
 
 public class CartItemResponseDto {
 
  public CartItemResponseDto() {
 		super();
 	}
- public CartItemResponseDto(BigDecimal price, BigDecimal quantity, BigDecimal subtotal, Long cartid,
-			Long cartitemid) {
+ public CartItemResponseDto(BigDecimal price, BigDecimal quantity, BigDecimal subtotal, Long cartid, Long cartitemid,
+			String product) {
 		super();
 		this.price = price;
 		this.quantity = quantity;
 		this.subtotal = subtotal;
 		Cartid = cartid;
 		this.cartitemid = cartitemid;
+		Product = product;
 	}
  public BigDecimal getPrice() {
 		return price;
@@ -49,11 +48,18 @@ public class CartItemResponseDto {
 	public void setCartitemid(Long cartitemid) {
 		this.cartitemid = cartitemid;
 	}
+	public String getProduct() {
+		return Product;
+	}
+	public void setProduct(String product) {
+		Product = product;
+	}
  private BigDecimal price ;
  private BigDecimal quantity;
  private BigDecimal subtotal;
  private Long Cartid;
  private Long cartitemid;
+ private String Product;
  
 
 }

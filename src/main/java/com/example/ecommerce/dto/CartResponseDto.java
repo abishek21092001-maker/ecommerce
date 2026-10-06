@@ -21,7 +21,7 @@ public class CartResponseDto {
 	public CartResponseDto() {
 		super();
 	}
-	public CartResponseDto(Long cartid, List<CartResponseDto> cart, BigDecimal total, Long userid) {
+	public CartResponseDto(Long cartid, List<CartItemResponseDto> cart, BigDecimal total, Long userid) {
 		super();
 		this.cartid = cartid;
 		this.cart = cart;
@@ -31,10 +31,10 @@ public class CartResponseDto {
 	public void setCartid(Long cartid) {
 		this.cartid = cartid;
 	}
-	public List<CartResponseDto> getCart() {
+	public List<CartItemResponseDto> getCart() {
 		return cart;
 	}
-	public void setCart(List<CartResponseDto> cart) {
+	public void setCart(List<CartItemResponseDto> cart) {
 		this.cart = cart;
 	}
 	public BigDecimal getTotal() {
@@ -50,7 +50,7 @@ public class CartResponseDto {
 		this.userid = userid;
 	}
 	private Long cartid;
-	private List<CartResponseDto> cart =new ArrayList<>();
+	private List<CartItemResponseDto> cart =new ArrayList<>();
 	private BigDecimal total;
 	private Long userid;
 

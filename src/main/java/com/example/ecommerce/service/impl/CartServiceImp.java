@@ -7,4 +7,6 @@ public interface CartServiceImp {
 
 	CartResponseDto addcart(CartRequestDto cartrequestdto);
 
+	void updatebyid(Long id, CartRequestDto cartrequestdto);
+
 }
